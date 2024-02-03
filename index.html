@@ -6,11 +6,6 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1" />
   <title></title>
   <style>
-    #background {
-      filter: blur(4px);
-      -webkit-filter: blur(4px); 
-    }
-
     * {
       font-family: Arial, Helvetica, sans-serif;
       box-sizing: border-box;
@@ -32,6 +27,8 @@
       width: 100vw;
       height: 100vh;
       position: fixed;
+      filter: blur(4px);
+      -webkit-filter: blur(4px); 
     }
 
     #player {
@@ -110,8 +107,8 @@
       justify-content: right;
     }
 
-    iframe {
-      pointer-events: none;
+    video {
+      display: none;
     }
 
     @media (max-width: 370px) {
@@ -127,7 +124,7 @@
 </head>
 <body>
 
-<iframe id="background" src="https://www.youtube.com/" frameborder="0"></iframe>
+<video id="background" src="/music.mp4" autoplay loop muted controls="false"></video>
 
 <div class="cookie-banner-overlay">
   <div class="cookie-banner">
@@ -148,11 +145,7 @@
 <div id="player"></div>
 
 <script>
-  var tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName("script")[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+  var video = document.getElementById("background");
   var player;
 
   function onYouTubeIframeAPIReady() {
@@ -185,6 +178,7 @@
   }
 
   function play() {
+    video.style.display = "none";
     document.querySelector("#player").style.display = "block";
     player.playVideo();
   }
